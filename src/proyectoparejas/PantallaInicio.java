@@ -1,58 +1,89 @@
 package proyectoparejas;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import java.awt.FlowLayout;
-import javax.swing.JLabel;
-import java.awt.Font;
-import javax.swing.JButton;
+import java.awt.*;
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 
 public class PantallaInicio {
 
-	private JFrame frmPrimeraPrueba;
+    private JFrame frmPrimeraPrueba;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					PantallaInicio window = new PantallaInicio();
-					window.frmPrimeraPrueba.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+    public static void main(String[] args) {
+        EventQueue.invokeLater(() -> {
+            try {
+                PantallaInicio window = new PantallaInicio();
+                window.frmPrimeraPrueba.setVisible(true);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+    }
 
-	/**
-	 * Create the application.
-	 */
-	public PantallaInicio() {
-		initialize();
-	}
+    public PantallaInicio() {
+        initialize();
+    }
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
-		frmPrimeraPrueba = new JFrame();
-		frmPrimeraPrueba.setTitle("PRIMERA PRUEBA\r\n");
-		frmPrimeraPrueba.setBounds(100, 100, 450, 300);
-		frmPrimeraPrueba.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmPrimeraPrueba.getContentPane().setLayout(null);
-		
-		JLabel lblNewLabel = new JLabel("HOLA MUNDO");
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 25));
-		lblNewLabel.setBounds(31, 74, 184, 75);
-		frmPrimeraPrueba.getContentPane().add(lblNewLabel);
-		
-		JLabel lblNewLabel_1 = new JLabel("FILLO DA PUTA");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 25));
-		lblNewLabel_1.setBounds(41, 145, 248, 63);
-		frmPrimeraPrueba.getContentPane().add(lblNewLabel_1);
-	}
+    private void initialize() {
+        // Crear el frame principal
+        frmPrimeraPrueba = new JFrame();
+        frmPrimeraPrueba.setTitle("Panel de Administrador");
+        frmPrimeraPrueba.setBounds(100, 100, 800, 500);
+        frmPrimeraPrueba.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frmPrimeraPrueba.setLayout(new BorderLayout());
+
+        // PANEL LATERAL (botones)
+        JPanel panelLateral = new JPanel();
+        panelLateral.setBackground(new Color(34, 45, 65));
+        panelLateral.setPreferredSize(new Dimension(200, 0));
+        panelLateral.setLayout(new GridLayout(6, 1, 10, 10));
+        panelLateral.setBorder(new EmptyBorder(20, 10, 20, 10));
+        frmPrimeraPrueba.add(panelLateral, BorderLayout.WEST);
+
+        // Botones del panel lateral
+        JButton btnUsuarios = crearBoton("Gestionar Usuarios");
+        JButton btnEstadisticas = crearBoton("Ver Estadísticas");
+        JButton btnConfiguracion = crearBoton("Configuración");
+        JButton btnReportes = crearBoton("Reportes");
+        JButton btnCerrarSesion = crearBoton("Cerrar Sesión");
+
+        panelLateral.add(btnUsuarios);
+        panelLateral.add(btnEstadisticas);
+        panelLateral.add(btnConfiguracion);
+        panelLateral.add(btnReportes);
+        panelLateral.add(btnCerrarSesion);
+
+        // PANEL PRINCIPAL (contenido)
+        JPanel panelPrincipal = new JPanel();
+        panelPrincipal.setBackground(new Color(246, 246, 246));
+        panelPrincipal.setLayout(new BorderLayout());
+        frmPrimeraPrueba.add(panelPrincipal, BorderLayout.CENTER);
+
+        // Título del panel principal
+        JLabel lblTitulo = new JLabel("Bienvenido al Panel de Administración");
+        lblTitulo.setFont(new Font("Segoe UI", Font.BOLD, 26));
+        lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
+        lblTitulo.setBorder(new EmptyBorder(20, 0, 20, 0));
+        panelPrincipal.add(lblTitulo, BorderLayout.NORTH);
+
+        // Área de contenido
+        JTextArea areaContenido = new JTextArea();
+        areaContenido.setText("Aquí se mostrará la información de la sección seleccionada...");
+        areaContenido.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+        areaContenido.setEditable(false);
+        areaContenido.setLineWrap(true);
+        areaContenido.setWrapStyleWord(true);
+        panelPrincipal.add(new JScrollPane(areaContenido), BorderLayout.CENTER);
+    }
+
+    // Método auxiliar para crear botones modernos
+    private JButton crearBoton(String texto) {
+        JButton boton = new JButton(texto);
+        boton.setFocusPainted(false);
+        boton.setBackground(new Color(58, 74, 97));
+        boton.setForeground(Color.WHITE);
+        boton.setFont(new Font("Segoe UI", Font.BOLD, 16));
+        boton.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
+        boton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        return boton;
+    }
 }
