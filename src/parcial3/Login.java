@@ -123,7 +123,7 @@ public class Login {
         // ------------------------------
         // USERNAME
         // ------------------------------
-        JLabel lblUsername = new JLabel("USERNAME");
+        JLabel lblUsername = new JLabel("JUANITO PEREZ");
         lblUsername.setForeground(Color.WHITE);
         lblUsername.setFont(new Font("Segoe UI", Font.BOLD, 18));
         lblUsername.setBounds(30, 30, 300, 25);
